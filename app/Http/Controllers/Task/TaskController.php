@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
+use App\Models\Task;
 
 
 class TaskController extends Controller
@@ -13,12 +14,12 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(User $user)
+    public function index()
     {
-       // dd($user);
-        $user = auth()->user();
+       $tasks = Task::all();
         return Inertia::render('Task/Task',[
-            'user' => $user
+            'user' => auth()->user(),
+            'tasks' => $tasks
         ]);
     }
 
