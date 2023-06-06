@@ -35,4 +35,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Route test
+Route::get('/test', function () {
+    return Inertia::render('Test');
+})->name('test');
+
+
+Route::resource('task', \App\Http\Controllers\Task\TaskController::class)->names('task');
+
+
 require __DIR__.'/auth.php';

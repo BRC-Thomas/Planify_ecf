@@ -33,7 +33,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 </div>
 
                 <div className="max-w-7xl mx-auto p-6 lg:p-8">
-                    <div className="flex justify-center">
+                    <div className="flex justify-center animate-spin">
                         <svg
                             viewBox="0 0 62 65"
                             fill="none"
