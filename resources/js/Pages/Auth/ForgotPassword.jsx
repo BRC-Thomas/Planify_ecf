@@ -3,6 +3,8 @@ import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
+import SecondaryButton from "@/Components/SecondaryButton.jsx";
+import { Link } from '@inertiajs/react';
 
 export default function ForgotPassword({ status }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -15,12 +17,17 @@ export default function ForgotPassword({ status }) {
         post(route('password.email'));
     };
 
-    return (
+  const handleCancel = () => {
+
+  }
+
+
+  return (
         <GuestLayout>
             <Head title="Mot de passe oublié" />
 
             <div className="mb-4 text-sm text-gray-600">
-            Mot de passe oublié? Aucun problème. Indiquez-nous simplement votre adresse e-mail et nous vous enverrons 
+            Mot de passe oublié? Aucun problème. Indiquez-nous simplement votre adresse e-mail et nous vous enverrons
             par e-mail un lien de réinitialisation de mot de passe qui vous permettra d'en choisir un nouveau.
             </div>
 
@@ -39,7 +46,11 @@ export default function ForgotPassword({ status }) {
 
                 <InputError message={errors.email} className="mt-2" />
 
-                <div className="flex items-center justify-end mt-4">
+                <div className="flex items-center justify-between mt-4">
+                    <SecondaryButton disabled={false} onClick={handleCancel}>
+                      <Link replace href="/login">Retour</Link>
+                    </SecondaryButton>
+
                     <PrimaryButton className="ml-4" disabled={processing}>
                         Réinitialiser le mot de passe
                     </PrimaryButton>

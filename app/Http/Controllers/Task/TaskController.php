@@ -16,6 +16,15 @@ class TaskController extends Controller
      */
     public function index()
     {
+
+      /*$task = new Task();
+        $task->title = 'Ma tâche';
+        $task->description = 'Description de ma tâche';
+        $task->isDone = false;
+        $task->category = 'Voyages';
+        $task->save();*/
+
+
        $tasks = Task::all();
         return Inertia::render('Task/Task',[
             'user' => auth()->user(),
