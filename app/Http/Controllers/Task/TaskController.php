@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Task;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Task\TaskFormRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
@@ -17,18 +18,19 @@ class TaskController extends Controller
     public function index()
     {
 
-      /*$task = new Task();
-        $task->title = 'Ma tâche';
+       $task = new Task();
+        $task->title = 'Ma tâche eeeeeeeeeee ';
         $task->description = 'Description de ma tâche';
         $task->isDone = false;
-        $task->category = 'Voyages';
-        $task->save();*/
+        $task->save();
+
 
 
        $tasks = Task::all();
         return Inertia::render('Task/Task',[
             'user' => auth()->user(),
-            'tasks' => $tasks
+            'tasks' => $tasks,
+            'flash' => session('success'),
         ]);
     }
 
@@ -43,7 +45,7 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TaskFormRequest $request)
     {
         //
     }
@@ -67,7 +69,7 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TaskFormRequest $request, string $id)
     {
         //
     }
@@ -77,6 +79,12 @@ class TaskController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        $task->delete();
+
+        session()->flash('success', 'Tâche supprimée avec succès');
+
+        return redirect()->back();
     }
 }
