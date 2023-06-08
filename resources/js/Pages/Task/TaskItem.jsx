@@ -75,7 +75,7 @@ export default function TaskItem({task, delFunc, editFunc}) {
           type="button"
           className="inline-flex items-center px-2 py-1 mt-2 bg-indigo-400 hover:bg-indigo-500 text-white text-sm font-medium rounded-md absolute bottom-1 right-10"
         >
-          ⚙️
+          🔎️
         </Link>
       </div>
     </li>

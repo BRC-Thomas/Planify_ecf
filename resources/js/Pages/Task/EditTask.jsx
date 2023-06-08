@@ -10,7 +10,7 @@ import InputError from "@/Components/InputError.jsx";
 export default function EditTask({ user, task }) {
   const { data, setData, put, errors } = useForm({
     title: task.title,
-    description: task.description || '',
+    description: task.description || " ",
     category: task.category,
   });
 
@@ -99,6 +99,11 @@ export default function EditTask({ user, task }) {
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
+                  <PrimaryButton className="ml-4">
+                    <Link href={route('task.index')}>
+                      Retour
+                    </Link>
+                  </PrimaryButton>
                   <PrimaryButton className="ml-4" >
                     Modifier et enregistrer
                   </PrimaryButton>

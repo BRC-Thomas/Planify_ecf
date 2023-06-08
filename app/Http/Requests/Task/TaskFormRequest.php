@@ -23,7 +23,7 @@ class TaskFormRequest extends FormRequest
     {
         return [
             'title'=>['required','min:3'],
-            // 'description'=>[''],
+            'description'=>['nullable'],
             // 'isDone'=>[''],
             'category'=>['required']
         ];

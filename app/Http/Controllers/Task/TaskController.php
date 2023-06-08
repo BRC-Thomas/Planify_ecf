@@ -98,7 +98,7 @@ class TaskController extends Controller
 
         // Met à jour les attributs de la tâche
         $task->title = $validatedData['title'];
-        $task->description = optional($validatedData)['description'];
+        $task->description = ($validatedData)['description'];
         $task->category = optional($validatedData)['category'];
 
         $task->save();
