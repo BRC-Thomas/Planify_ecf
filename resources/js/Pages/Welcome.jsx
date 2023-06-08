@@ -37,7 +37,7 @@ export default function Welcome({auth}) {
         <GuestLayout>
           <div className="max-w-7xl mx-auto p-6 lg:p-8">
             <div className="flex justify-center">
-              <ApplicationLogo class='max-w-sm'/>
+              <ApplicationLogo className='max-w-sm'/>
             </div>
 
             <div className="text-center mt-8">
