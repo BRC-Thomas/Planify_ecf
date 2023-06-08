@@ -3,7 +3,7 @@ import {useState, useEffect} from "react";
 import { router } from '@inertiajs/react'
 
 
-export default function TaskList({ tasks }) {
+export default function TaskList({ tasks, selectedCategory }) {
 
   const [dataArr, setDataArr] = useState(tasks);
   const [flash,setFlash] = useState(null);
@@ -35,11 +35,18 @@ export default function TaskList({ tasks }) {
     }
   }, [flash]);
 
+  useEffect(() => {
+    if (tasks !== dataArr) {
+      setDataArr(tasks);
+    }
+  }, [tasks]);
+
 
 
 
   return (
     <>
+      {selectedCategory && <p>Filtre : {selectedCategory}</p>}
       {flash && (
         <div className="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 shadow-md max-w-fit absolute mt-[-60px] right-5 z-10  " role="alert">
           <div className="flex px-4 py-3">
@@ -57,20 +64,26 @@ export default function TaskList({ tasks }) {
         </div>
     )}
 
-      <ul role="list" className="divide-y divide-gray-100">
-        {dataArr.map((task) => (
-          <TaskItem
-            key={task.id}
-            title={task.title}
-            description={task.description}
-            created_at={task.created_at}
-            updated_at={task.updated_at}
-            category={task.category}
-            task={task}
-            delFunc={deleteElement}
-          />
-        ))}
-      </ul>
+      {dataArr.length === 0 ? (
+        <div className="max-w-7xl mx-auto mt-8 sm:px-6 lg:px-8">
+            Vous n'avez aucune tâche dans cette catégorie.
+        </div>
+      ) : (
+        <ul role="list" className="divide-y divide-gray-100">
+          {dataArr.map((task) => (
+            <TaskItem
+              key={task.id}
+              title={task.title}
+              description={task.description}
+              created_at={task.created_at}
+              updated_at={task.updated_at}
+              category={task.category}
+              task={task}
+              delFunc={deleteElement}
+            />
+          ))}
+        </ul>
+      )}
     </>
   );
 }

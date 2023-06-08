@@ -15,20 +15,19 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $category = $request->input('category');
 
-/*       $task = new Task();
-        $task->title = 'Ma tâche eeeeeeeeeee ';
-        $task->description = 'Description de ma tâche';
-        $task->isDone = false;
-        $task->save();*/
+        $tasks = ($category)
+            ? Task::where('category', $category)->get()
+            : Task::all();
 
-       $tasks = Task::all();
-        return Inertia::render('Task/Task',[
+        return Inertia::render('Task/Task', [
             'user' => auth()->user(),
             'tasks' => $tasks,
             'flash' => session('success'),
+            'selectedCategory' => $category,
         ]);
     }
 
