@@ -1,14 +1,15 @@
 import TaskItem from './TaskItem.jsx';
 import {useState, useEffect} from "react";
-import {router} from '@inertiajs/react'
+import { router } from '@inertiajs/react'
 
 
 export default function TaskList({ tasks }) {
 
   const [dataArr, setDataArr] = useState(tasks);
   const [flash,setFlash] = useState(null);
+
+  // Delete Task
   const deleteElement = async (id) => {
-    console.log(id);
     try {
       await router.delete(`/task/${id}`);
       setDataArr(dataArr.filter(task => task.id !== id));
@@ -17,7 +18,6 @@ export default function TaskList({ tasks }) {
     } catch (error) {
       console.error('Erreur lors de la suppression de la tâche', error);
     }
-
   };
 
   const alert_del = document.querySelectorAll('.alert-del');

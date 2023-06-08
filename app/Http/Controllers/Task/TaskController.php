@@ -76,8 +76,14 @@ class TaskController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        return Inertia::render('Task/EditTask',[
+            'user' => auth()->user(),
+            'task' => $task,
+        ]);
     }
+
 
     /**
      * Update the specified resource in storage.

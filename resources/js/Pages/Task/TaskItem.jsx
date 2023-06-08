@@ -1,5 +1,12 @@
 import './TaskItem.css';
-export default function TaskList({ task, delFunc  }) {
+import {Link, usePage} from "@inertiajs/react";
+
+
+
+export default function TaskItem({task, delFunc, editFunc}) {
+
+  const { page } = usePage();
+
   const formattedDate = dateStr => {
     return new Date(dateStr).toLocaleString('fr-FR', {
       year: 'numeric',
@@ -15,6 +22,10 @@ export default function TaskList({ task, delFunc  }) {
     e.preventDefault();
     delFunc(task.id);
   };
+
+
+
+
 
   return (
     <li className="flex justify-between gap-x-6 py-5 hover-underline-animation relative">
@@ -51,19 +62,21 @@ export default function TaskList({ task, delFunc  }) {
         >
           <button
             type="submit"
-            className="inline-flex items-center px-2 py-1 mt-2 bg-indigo-400 hover:bg-indigo-500 text-white text-sm font-medium rounded-md absolute bottom-1 right-10"
+            className="inline-flex items-center px-2 py-1 mt-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-md absolute bottom-1 right-0"
             onClick={handleDelete}
           >
-            ⚙️
+            🗑️
           </button>
         </form>
-        <button
-          type="submit"
-          className="inline-flex items-center px-2 py-1 mt-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-md absolute bottom-1 right-"
-          onClick={handleDelete}
+        <Link
+          href={`/task/${task.id}/edit`}
+          method="get"
+          as="button"
+          type="button"
+          className="inline-flex items-center px-2 py-1 mt-2 bg-indigo-400 hover:bg-indigo-500 text-white text-sm font-medium rounded-md absolute bottom-1 right-10"
         >
-          🗑️
-        </button>
+          ⚙️
+        </Link>
       </div>
     </li>
   );
