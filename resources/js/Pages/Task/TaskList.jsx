@@ -31,7 +31,7 @@ export default function TaskList({ tasks }) {
     if(flash) {
       setTimeout(() => {
         setFlash(null)
-      },10000)
+      },2000)
     }
   }, [flash]);
 
@@ -41,7 +41,7 @@ export default function TaskList({ tasks }) {
   return (
     <>
       {flash && (
-        <div className="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 shadow-md max-w-fit absolute mt-[-60px] right-5 z-10" role="alert">
+        <div className="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 shadow-md max-w-fit absolute mt-[-60px] right-5 z-10  " role="alert">
           <div className="flex px-4 py-3">
             <div className="py-1">
               <svg className="fill-current h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -65,6 +65,7 @@ export default function TaskList({ tasks }) {
             description={task.description}
             created_at={task.created_at}
             updated_at={task.updated_at}
+            category={task.category}
             task={task}
             delFunc={deleteElement}
           />

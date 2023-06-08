@@ -22,10 +22,10 @@ class TaskFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'=>['required','min:3']
+            'title'=>['required','min:3'],
             // 'description'=>[''],
             // 'isDone'=>[''],
-            // 'category'=>['required']
+            'category'=>['required']
         ];
     }
 }
