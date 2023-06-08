@@ -18,13 +18,11 @@ class TaskController extends Controller
     public function index()
     {
 
-       $task = new Task();
+/*       $task = new Task();
         $task->title = 'Ma tâche eeeeeeeeeee ';
         $task->description = 'Description de ma tâche';
         $task->isDone = false;
-        $task->save();
-
-
+        $task->save();*/
 
        $tasks = Task::all();
         return Inertia::render('Task/Task',[
@@ -39,7 +37,9 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Task/CreateTask',[
+            'user' => auth()->user(),
+        ]);
     }
 
     /**
@@ -47,7 +47,20 @@ class TaskController extends Controller
      */
     public function store(TaskFormRequest $request)
     {
-        //
+        // Valide les données du formulaire
+        $validatedData = $request->validated();
+
+        // Créer une nouvelle instance de la tâche
+        $task = new Task();
+        $task->title = $validatedData['title'];
+        $task->description = optional($validatedData)['description'];
+       // $task->category = optional($validatedData)['category'];
+        // Vérifier si la catégorie est définie, sinon la définir sur "Sans catégorie"
+         $task->category = isset($validatedData['category']) ? $validatedData['category'] : 'Sans catégorie';
+
+        $task->save();
+
+        return redirect()->route('task.index');
     }
 
     /**
@@ -71,7 +84,20 @@ class TaskController extends Controller
      */
     public function update(TaskFormRequest $request, string $id)
     {
-        //
+        // Valide les données du formulaire
+        $validatedData = $request->validated();
+
+        // Trouve la tâche à mettre à jour
+        $task = Task::findOrFail($id);
+
+        // Met à jour les attributs de la tâche
+        $task->title = $validatedData['title'];
+        $task->description = optional($validatedData)['description'];
+        $task->category = optional($validatedData)['category'];
+
+        $task->save();
+
+        return redirect()->route('task.index');
     }
 
     /**
@@ -79,6 +105,7 @@ class TaskController extends Controller
      */
     public function destroy(string $id)
     {
+        // Trouve la tâche à mettre à supprimer
         $task = Task::findOrFail($id);
 
         $task->delete();
