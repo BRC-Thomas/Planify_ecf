@@ -40,7 +40,7 @@ export default function TaskItem({task, delFunc, editFunc}) {
         </div>
       </div>
 
-      <div className="hidden sm:flex sm:flex-col sm:items-end">
+      <div className="flex flex-col items-end">
         <p className="text-sm leading-6 text-gray-900">{task.category}</p>
         {task.updated_at === task.created_at ? (
           <p className="pb-1 text-xs leading-5 text-gray-500 mb-2">

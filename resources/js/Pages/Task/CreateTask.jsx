@@ -61,7 +61,7 @@ export default function Task({ user }) {
                   <label htmlFor="description" className="block font-medium text-sm text-gray-700 ">
                     Description
                   </label>
-                  <div>
+                  <div className={'relative'}>
                 <textarea
                   id="description"
                   name="description"
@@ -70,7 +70,13 @@ export default function Task({ user }) {
                   value={data.description}
                   onChange={(e) => setData('description', e.target.value)}
                 />
+                    <aside className={data.description.length > 500 ? 'text-red-500 absolute bottom-1 right-1' : ' absolute bottom-[-25px] right-5'}
+                    >{data.description.length}/500</aside>
+                    {data.description.length > 500 && (
+                        <aside className={'text-red-500'}>La description ne peut dépasser les 500 caractères.</aside>
+                    )}
                   </div>
+
                   <p className="mt-2 text-sm leading-6 text-gray-600">Vous pouvez détailler votre tâche.</p>
                 </div>
 

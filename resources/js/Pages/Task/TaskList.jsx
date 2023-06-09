@@ -11,10 +11,13 @@ export default function TaskList({ tasks, selectedCategory }) {
   // Delete Task
   const deleteElement = async (id) => {
     try {
+      console.log("deleteElement fonction (taskList)");
       await router.delete(`/task/${id}`);
       setDataArr(dataArr.filter(task => task.id !== id));
       setFlash('Tâche supprimée avec succès');
-      router.visit('/task', { preserveScroll: true });
+
+      await new Promise(resolve => setTimeout(resolve, 300));
+      router.reload({ preserveScroll: true });
     } catch (error) {
       console.error('Erreur lors de la suppression de la tâche', error);
     }

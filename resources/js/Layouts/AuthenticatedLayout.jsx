@@ -181,6 +181,11 @@ export default function Authenticated({ user, header, children }) {
       )}
 
       <main>{children}</main>
+
+      <button
+          className="bg-indigo-200 hover:bg-indigo-300 text-gray-800 px-2 text-3xl rounded-full inline-flex items-center fixed bottom-4 right-2 ">
+        <a href='/task/create'>+</a>
+      </button>
     </div>
   );
 }
