@@ -39,7 +39,7 @@ export default function Authenticated({ user, header, children }) {
                   Mes tâches
                 </NavLink>
                 <NavLink href="/task/create" active={route().current("task.create")}>
-                  Nouvelle tâche 
+                  Nouvelle tâche
                 </NavLink>
               </div>
             </div>
@@ -160,6 +160,12 @@ export default function Authenticated({ user, header, children }) {
                 as="button"
               >
                 Se déconnecter
+              </ResponsiveNavLink>
+              <ResponsiveNavLink href="/task">
+                Mes tâches
+              </ResponsiveNavLink>
+              <ResponsiveNavLink href="/task/create">
+                Nouvelle tâche
               </ResponsiveNavLink>
             </div>
           </div>
