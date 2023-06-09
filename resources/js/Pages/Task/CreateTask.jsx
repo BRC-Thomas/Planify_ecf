@@ -14,7 +14,6 @@ export default function Task({ user }) {
     description: '',
     category: 'Sans catégorie',
   })
-
   const handleSubmit = (e) =>{
     e.preventDefault();
     post(route('task.store'), data);
@@ -41,20 +40,22 @@ export default function Task({ user }) {
               <form onSubmit={handleSubmit}>
                 <div>
                   <InputLabel htmlFor="text" value="Titre" />
-
-                  <TextInput
-                    id="title"
-                    type="text"
-                    name="title"
-                    //value={data.email}
-                    className="mt-1 block w-full"
-                    autoComplete="off"
-                    isFocused={true}
-                    value={data.title}
-                    onChange={(e) => setData('title', e.target.value)}
-                  />
-
-                 <InputError message={errors.title} className="mt-2" />
+                  <div className='relative'>
+                    <TextInput
+                      id="title"
+                      type="text"
+                      name="title"
+                      className="mt-1 block w-full "
+                      autoComplete="off"
+                      isFocused={true}
+                      value={data.title}
+                      onChange={(e) => setData('title', e.target.value)}
+                    />
+                    <aside className={data.title.length > 255 ? 'text-red-500  absolute bottom-[-28px] right-2' : 'absolute bottom-[-28px] right-2 '}>
+                      {data.title.length}/255
+                    </aside>
+                  </div>
+                  <InputError message={errors.title} className="mt-2" />
                 </div>
 
                 <div className="col-span-full mt-4">
@@ -70,15 +71,16 @@ export default function Task({ user }) {
                   value={data.description}
                   onChange={(e) => setData('description', e.target.value)}
                 />
-                    <aside className={data.description.length > 500 ? 'text-red-500 absolute bottom-1 right-1' : ' absolute bottom-[-25px] right-5'}
-                    >{data.description.length}/500</aside>
-                    {data.description.length > 500 && (
-                        <aside className={'text-red-500'}>La description ne peut dépasser les 500 caractères.</aside>
-                    )}
+                    <aside className={data.description.length > 500 ? 'text-red-600 absolute bottom-[-28px] right-2' : ' absolute bottom-[-28px] right-2'}>
+                      {data.description.length}/500
+                    </aside>
                   </div>
 
                   <p className="mt-2 text-sm leading-6 text-gray-600">Vous pouvez détailler votre tâche.</p>
+                  {errors.description && data.description.length > 500 ? <InputError message={errors.description} className="mt-2" /> : '' }
                 </div>
+
+
 
                 <div className="col-span-full mt-4 sm:col-span-3">
                   <label htmlFor="category" className="block text-sm font-medium leading-6 text-gray-900">

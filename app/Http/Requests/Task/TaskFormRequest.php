@@ -22,9 +22,8 @@ class TaskFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'=>['required','min:3'],
-            'description'=>['nullable'],
-            // 'isDone'=>[''],
+            'title'=>['required','min:3','max:255'],
+            'description'=>['nullable','max:500'],
             'category'=>['required']
         ];
     }

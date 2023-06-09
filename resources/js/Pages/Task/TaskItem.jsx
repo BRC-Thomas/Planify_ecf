@@ -31,10 +31,10 @@ export default function TaskItem({task, delFunc, editFunc}) {
     <li className="flex justify-between gap-x-6 py-5 hover-underline-animation relative">
       <div className="flex gap-x-4">
         <div className="min-w-0 flex-auto">
-          <p className="text-sm truncate font-semibold leading-6 text-gray-900 max-w-md">
+          <p className="text-sm truncate font-semibold leading-6 text-gray-900 max-w-[100px] sm:max-w-[300px] md:max-w-[450px]">
             {task.title}
           </p>
-          <p className="mt-1 truncate text-xs leading-5 text-gray-500 max-w-md">
+          <p className="mt-1 truncate text-xs leading-5 text-gray-500 max-w-[100px] sm:max-w-[300px] md:max-w-[450px]">
             {task.description}
           </p>
         </div>
