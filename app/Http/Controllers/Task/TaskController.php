@@ -53,9 +53,7 @@ class TaskController extends Controller
         $task = new Task();
         $task->title = $validatedData['title'];
         $task->description = optional($validatedData)['description'];
-       // $task->category = optional($validatedData)['category'];
-        // Vérifier si la catégorie est définie, sinon la définir sur "Sans catégorie"
-         $task->category = isset($validatedData['category']) ? $validatedData['category'] : 'Sans catégorie';
+        $task->category = $validatedData['category'] ?? 'Sans catégorie';
 
         $task->save();
 
@@ -89,13 +87,11 @@ class TaskController extends Controller
      */
     public function update(TaskFormRequest $request, string $id)
     {
-        // Valide les données du formulaire
         $validatedData = $request->validated();
 
-        // Trouve la tâche à mettre à jour
+
         $task = Task::findOrFail($id);
 
-        // Met à jour les attributs de la tâche
         $task->title = $validatedData['title'];
         $task->description = ($validatedData)['description'];
         $task->category = optional($validatedData)['category'];
@@ -104,6 +100,20 @@ class TaskController extends Controller
 
         return redirect()->route('task.index');
     }
+
+
+    /**
+     * Met à jour "isDone"
+     */
+    public function updateIsDone(string $id)
+    {
+        $task = Task::findOrFail($id);
+        $task->isDone = !$task->isDone; // Inverse la valeur de la propriété "isDone"
+        $task->save();
+
+        return redirect()->route('task.update',$id);
+    }
+
 
     /**
      * Remove the specified resource from storage.

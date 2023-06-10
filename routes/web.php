@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Task\TaskController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -41,7 +42,9 @@ Route::get('/test', function () {
 })->name('test');
 
 
-Route::resource('task', \App\Http\Controllers\Task\TaskController::class)->names('task');
+Route::resource('task', TaskController::class)->names('task');
+Route::put('/tasks/{task}/isDone', [TaskController::class, 'updateIsDone'])->name('task.updateIsDone');
+
 
 
 require __DIR__.'/auth.php';

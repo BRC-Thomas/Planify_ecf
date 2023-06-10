@@ -11,18 +11,38 @@ export default function TaskList({ tasks, selectedCategory }) {
   // Delete Task
   const deleteElement = async (id) => {
     try {
-      console.log("deleteElement fonction (taskList)");
       await router.delete(`/task/${id}`);
-      setDataArr(dataArr.filter(task => task.id !== id));
+      if (dataArr) {
+        setDataArr(dataArr.filter(task => task.id !== id));
+      }
       setFlash('Tâche supprimée avec succès');
 
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      setFlash(null);
       router.reload({ preserveScroll: true });
     } catch (error) {
       console.error('Erreur lors de la suppression de la tâche', error);
     }
   };
 
+  // Check isDone
+  const checkElement = async (taskId) => {
+    try {
+      const updatedTask = await router.put(`/tasks/${taskId}/isDone`);
+      if (updatedTask) {
+        const updatedDataArr = dataArr.map((task) =>
+            task.id === taskId ? updatedTask : task
+        );
+        setDataArr(updatedDataArr);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour de la tâche', error);
+    }
+  };
+
+
+
+  // Cache le message flash si on le ferme
   const alert_del = document.querySelectorAll('.alert-del');
   alert_del.forEach((x) =>
     x.addEventListener('click', function () {
@@ -74,16 +94,13 @@ export default function TaskList({ tasks, selectedCategory }) {
       ) : (
         <ul role="list" className="divide-y divide-gray-100">
           {dataArr.map((task) => (
-            <TaskItem
-              key={task.id}
-              title={task.title}
-              description={task.description}
-              created_at={task.created_at}
-              updated_at={task.updated_at}
-              category={task.category}
-              task={task}
-              delFunc={deleteElement}
-            />
+              <TaskItem
+                  task={task}
+                  key={task.id}
+                  delFunc={deleteElement}
+                  checkFunc={checkElement}
+                  /*isDone={task.isDone}*/
+              />
           ))}
         </ul>
       )}
