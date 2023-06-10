@@ -33,7 +33,7 @@ export default function EditTask({ user, task }) {
       user={user.name}
       header={
         <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-          Ajouter des tâches
+          Éditer des tâches
         </h2>
       }
     >
@@ -49,19 +49,22 @@ export default function EditTask({ user, task }) {
               <form onSubmit={handleSubmit}>
                 <div>
                   <InputLabel htmlFor="text" value="Titre" />
-
-                  <TextInput
-                    id="title"
-                    type="text"
-                    name="title"
-                    //value={data.email}
-                    className="mt-1 block w-full"
-                    autoComplete="off"
-                    isFocused={true}
-                    value={data.title}
-                    onChange={(e) => setData('title', e.target.value)}
-                  />
-
+                  <div className="relative">
+                    <TextInput
+                      id="title"
+                      type="text"
+                      name="title"
+                      //value={data.email}
+                      className="mt-1 block w-full"
+                      autoComplete="off"
+                      isFocused={true}
+                      value={data.title}
+                      onChange={(e) => setData('title', e.target.value)}
+                    />
+                    <aside className={data.title.length > 255 ? 'text-red-500  absolute bottom-[-28px] right-2' : 'absolute bottom-[-28px] right-2 '}>
+                      {data.title.length}/255
+                    </aside>
+                </div>
                   <InputError message={errors.title} className="mt-2" />
                 </div>
 
