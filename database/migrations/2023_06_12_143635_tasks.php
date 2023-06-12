@@ -16,11 +16,13 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->boolean('isDone')
-            ->nullable()
-            ->default(false);
+                ->nullable()
+                ->default(false);
             $table->enum('category', ['Voyages', 'Sport','Finance','Professionnel','Autre','Sans catégorie'])
-                    ->nullable()
-                    ->default('Sans catégorie');
+                ->nullable()
+                ->default('Sans catégorie');
+            $table->timestamp('due_date')
+                ->nullable();
             $table->timestamps();
         });
     }

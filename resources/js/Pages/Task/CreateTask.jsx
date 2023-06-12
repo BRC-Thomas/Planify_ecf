@@ -1,24 +1,65 @@
-import React from "react";
+import React, {useState} from "react";
 import AuthenticatedLayout from './../../Layouts/AuthenticatedLayout';
 import {Head, Link, useForm} from '@inertiajs/react';
 import InputLabel from "@/Components/InputLabel.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import PrimaryButton from '@/Components/PrimaryButton';
 import InputError from "@/Components/InputError.jsx";
-
+import Datepicker from "tailwind-datepicker-react"
+import arrowLongLeftIcon from "@heroicons/react/20/solid/esm/ArrowLongLeftIcon.js";
 
 export default function Task({ user }) {
+
 
   const { data, setData, post, processing, errors } = useForm({
     title: '',
     description: '',
     category: 'Sans catégorie',
+    due_date: '',
   })
   const handleSubmit = (e) =>{
     e.preventDefault();
     post(route('task.store'), data);
-
   }
+
+  const options = {
+    title: "Choisir une date d'échéance",
+    autoHide: true,
+    todayBtn: true,
+    todayBtnText:'aujourd\'hui',
+    weekDays: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
+    clearBtn: false,
+    theme: {
+      background: "bg-gray-100 shadow-xl",
+      todayBtn: "bg-indigo-600 hover:bg-slate-300",
+      selected: "bg-indigo-600 hover:bg-slate-300",
+      icons:"bg-slate-200 hover:bg-slate-300" ,
+    },
+    icons: {
+      prev: () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+      </svg>
+      ,
+      next: () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+      </svg>,
+    },
+    datepickerClassNames: "top-[-850%] left-[-15px]",
+    defaultDate: '',
+    language: "fr",
+  }
+
+  const [show, setShow] = useState(false);
+  const [selectedDate, setSelectedDate] = useState('');
+  const handleChange = (selectedDate) => {
+    setSelectedDate(selectedDate)
+    console.log(selectedDate)
+  }
+  const handleClose = (state) => {
+    setShow(state)
+  }
+
+
   return (
     <AuthenticatedLayout
       user={user.name}
@@ -100,6 +141,13 @@ export default function Task({ user }) {
                       <option value="Autre">⚙️ Autre</option>
                     </select>
                   </div>
+                </div>
+
+                <div className="inline-flex mt-4 px-0 font-semibold  shadow-sm  relative">
+
+                  <Datepicker options={options} onChange={handleChange} show={show} setShow={handleClose} >
+                    <input type="text" className="rounded-md" placeholder="Select Date" value={selectedDate} onFocus={() => setShow(true)} readOnly />
+                  </Datepicker>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
