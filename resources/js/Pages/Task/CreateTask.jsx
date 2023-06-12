@@ -55,7 +55,7 @@ export default function Task({ user }) {
                       {data.title.length}/255
                     </aside>
                   </div>
-                  <InputError message={errors.title} className="mt-2" />
+                  {data.title.length > 255 && <InputError message={errors.title} className="mt-2"/> }
                 </div>
 
                 <div className="col-span-full mt-4">
@@ -75,8 +75,8 @@ export default function Task({ user }) {
                       {data.description.length}/500
                     </aside>
                   </div>
-
-                  {errors.description && data.description.length > 500 ? <InputError message={errors.description} className="mt-2" /> : '' }
+                  {data.description.length > 500 &&
+                    <InputError message={errors.description} className="mt-2" /> }
                 </div>
 
                 <div className="col-span-full mt-4 sm:col-span-3">

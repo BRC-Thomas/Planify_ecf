@@ -37,7 +37,7 @@ export default function EditTask({ user, task }) {
         </h2>
       }
     >
-      <Head title="Ajout tâche" />
+      <Head title="Éditer des tâches" />
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
@@ -54,7 +54,6 @@ export default function EditTask({ user, task }) {
                       id="title"
                       type="text"
                       name="title"
-                      //value={data.email}
                       className="mt-1 block w-full"
                       autoComplete="off"
                       isFocused={true}
@@ -64,24 +63,29 @@ export default function EditTask({ user, task }) {
                     <aside className={data.title.length > 255 ? 'text-red-500  absolute bottom-[-28px] right-2' : 'absolute bottom-[-28px] right-2 '}>
                       {data.title.length}/255
                     </aside>
+                     {data.title.length > 255 && <InputError message={errors.title} className="mt-2"/> }
                 </div>
-                  <InputError message={errors.title} className="mt-2" />
                 </div>
 
                 <div className="col-span-full mt-4">
                   <label htmlFor="description" className="block font-medium text-sm text-gray-700 ">
                     Description
                   </label>
-                  <div>
-                <textarea
-                  id="description"
-                  name="description"
-                  rows={3}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  min-h-[150px] max-h-[500px] focus:ring-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm sm:leading-6 sm:max-h-[200px] "
-                  value={data.description}
-                  onChange={(e) => setData('description', e.target.value)}
-                />
-                  </div>
+                  <div className='relative'>
+                    <textarea
+                      id="description"
+                      name="description"
+                      rows={3}
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  min-h-[150px] max-h-[500px] focus:ring-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm sm:leading-6 sm:max-h-[200px] "
+                      value={data.description}
+                      onChange={(e) => setData('description', e.target.value)}
+                    />
+                    <aside className={data.description.length > 500 ? 'text-red-600 absolute bottom-[-28px] right-2' : 'absolute bottom-[-28px] right-2'}>
+                      {data.description.length}/500
+                    </aside>
+                </div>
+                  {data.description.length > 500 &&
+                    <InputError message={errors.description} className="mt-2" /> }
                   <p className="mt-2 text-sm leading-6 text-gray-600">Vous pouvez modifier le détail votre tâche.</p>
                 </div>
 
