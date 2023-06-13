@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Task;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Task\TaskFormRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
@@ -46,14 +47,19 @@ class TaskController extends Controller
      */
     public function store(TaskFormRequest $request)
     {
-        // Valide les données du formulaire
         $validatedData = $request->validated();
 
-        // Créer une nouvelle instance de la tâche
         $task = new Task();
         $task->title = $validatedData['title'];
         $task->description = optional($validatedData)['description'];
         $task->category = $validatedData['category'] ?? 'Sans catégorie';
+
+        if (isset($validatedData['due_date'])) {
+            $task->due_date = Carbon::createFromTimestamp($validatedData['due_date'] / 1000);
+        } else {
+            $task->due_date = null;
+        }
+
 
         $task->save();
 
@@ -96,6 +102,12 @@ class TaskController extends Controller
         $task->description = ($validatedData)['description'];
         $task->category = optional($validatedData)['category'];
 
+        if (isset($validatedData['due_date'])) {
+            $task->due_date = Carbon::createFromTimestamp($validatedData['due_date'] / 1000);
+        } else {
+            $task->due_date = null;
+        }
+
         $task->save();
 
         return redirect()->route('task.index');
@@ -108,7 +120,7 @@ class TaskController extends Controller
     public function updateIsDone(string $id)
     {
         $task = Task::findOrFail($id);
-        $task->isDone = !$task->isDone; // Inverse la valeur de la propriété "isDone"
+        $task->isDone = !$task->isDone;
         $task->save();
 
         return redirect()->route('task.update',$id);
@@ -120,7 +132,6 @@ class TaskController extends Controller
      */
     public function destroy(string $id)
     {
-        // Trouve la tâche à mettre à supprimer
         $task = Task::findOrFail($id);
 
         $task->delete();

@@ -24,7 +24,8 @@ class TaskFormRequest extends FormRequest
         return [
             'title'=>['required','min:3','max:255'],
             'description'=>['nullable','max:500'],
-            'category'=>['required']
+            'category'=>['required'],
+            'due_date'=>['nullable']
         ];
     }
 }
