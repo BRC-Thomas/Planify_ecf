@@ -1,17 +1,10 @@
-*, ::before, ::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-
 .div-main {
   max-width: 375px;
   min-height: 380px;
   margin: 100px auto 0;
   border-radius: 10px;
   padding: 30px 10px;
-  color: #212121;
+  color: #334155;
   background-color: rgba(255,255,255,0.5);
   box-shadow: 0 5px 5px rgba(0,0,0,0.3);
   text-align: center;
@@ -42,18 +35,18 @@
 .city-name {
   font-family: Lato, sans-serif;
   font-size: 50px;
-  color: #333;
+  color: #334155;
 }
 .country-name {
   font-size: 24px;
   margin-bottom: 45px;
-  color: #606060;
+  color: #334155;
 }
 .temperature {
   font-family: Lato, sans-serif;
-  font-size: 70px;
+  font-size: 50px;
   font-weight: 700;
-  color: #212121;
+  color: #334155;
 }
 
 .info-icon-container {
