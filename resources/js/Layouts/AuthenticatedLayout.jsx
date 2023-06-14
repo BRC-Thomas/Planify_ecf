@@ -31,9 +31,6 @@ export default function Authenticated({ user, header, children }) {
                 >
                   Dashboard
                 </NavLink>
-                <NavLink href="/test" active={route().current("test")}>
-                  Test
-                </NavLink>
                 <NavLink href="/task" active={route().current("task.index")}>
                   Mes tâches
                 </NavLink>

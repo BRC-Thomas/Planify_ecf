@@ -32,10 +32,10 @@ export default function TaskItem({task, delFunc, checkFunc,  }) {
 
   return (
 
-    <div class="lg:w-1/3 px-2 mb-4 md:mb-2 relative">
+    <div className="lg:w-1/3 px-2 mb-4 md:mb-2 relative">
       <div>
         <div
-          class=" p-2 rounded-lg shadow hover:bg-gray-100 ">
+          className=" p-2 rounded-lg shadow hover:bg-gray-100 ">
           <Link
             href={`/task/${task.id}/edit`}
             method="get"
@@ -45,12 +45,12 @@ export default function TaskItem({task, delFunc, checkFunc,  }) {
           >{task.title}
 
           </Link>
-          <p class="mb-3 font-normal text-gray-500 break-words max-w-[80%] h-10 truncate">{task.description}</p>
+          <p className="mb-3 font-normal text-gray-500 break-words max-w-[80%] h-10 truncate">{task.description}</p>
         </div>
 
         <p className="text-sm leading-6 text-gray-900 absolute top-0 right-5">{task.category}</p>
         {task.isDone ? (
-            <p className="pb-1 text-xs leading-5 text-gray-500 mb-2 absolute top-0 right-5">
+            <p className="pb-1 text-xs leading-5 text-gray-500 mb-2 absolute top-5 right-5">
               Fini le{' '}<time dateTime={task.updated_at}>{formattedDate(task.updated_at)}</time>
             </p> ) :
           task.updated_at === task.created_at ? (
@@ -61,7 +61,7 @@ export default function TaskItem({task, delFunc, checkFunc,  }) {
               </time>
             </p>
           ) : (
-            <p className="pb-1 text-xs leading-5 text-gray-500 mb-2 absolute top-0 right-5">
+            <p className="pb-1 text-xs leading-5 text-gray-500 mb-2 absolute top-5 right-5">
               Modifié le{' '}
               <time dateTime={task.updated_at}>
                 {formattedDate(task.updated_at)}

@@ -11,7 +11,6 @@ export default function DashboardLayout({tasks, apiKey}) {
 
   const [dataArr, setDataArr] = useState( tasks );
 
-  console.log('api key:',apiKey)
 
   return (
     <>
@@ -20,14 +19,14 @@ export default function DashboardLayout({tasks, apiKey}) {
 
         <div>
           {dataArr.length === 0 ? (
-              <div class="h-full space-y-6 group p-4 sm:p-8 rounded-3xl bg-white border border-gray-200/50 dark:shadow-none dark:border-gray-700 dark:bg-gray-800 bg-opacity-50 shadow-2xl shadow-gray-600/10 ">
+              <div className="h-full space-y-6 group p-4 sm:p-8 rounded-3xl bg-white border border-gray-200/50 dark:shadow-none dark:border-gray-700 dark:bg-gray-800 bg-opacity-50 shadow-2xl shadow-gray-600/10 ">
                   Vous n'avez aucune tâche à afficher.
               </div>
           ) : (
 
-            <div class="h-full space-y-6 group p-4 sm:p-8 rounded-3xl bg-white border border-gray-200/50 dark:shadow-none dark:border-gray-700 dark:bg-gray-800 bg-opacity-50 shadow-2xl shadow-gray-600/10 ">
+            <div className="h-full space-y-6 group p-4 sm:p-8 rounded-3xl bg-white border border-gray-200/50 bg-opacity-50 shadow-2xl shadow-gray-600/10 ">
               <p className="text-center underline text-2xl">Mes 3 dernières tâches</p>
-              <div class="lg:flex -mx-2">
+              <div className="lg:flex -mx-2">
                 {dataArr.map((task) => (
                     <TaskItemDashboard
                         task={task}

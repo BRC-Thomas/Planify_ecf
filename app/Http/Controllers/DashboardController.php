@@ -23,7 +23,6 @@ class DashboardController extends Controller
             'user' => $user,
            // 'tasks' => $tasks,
             'tasks' => $tasks->items(), // Récupérer les éléments de la pagination
-            //'links' => $tasks->links(), // Récupérer les liens de pagination
             'apiKey' => env('API_KEY')
         ]);
     }
