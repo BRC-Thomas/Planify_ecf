@@ -30,7 +30,7 @@ export default function TaskItem({task, delFunc, checkFunc,  }) {
     checkFunc(task.id);
   }
 
-  console.log(task)
+  //console.log(task)
 
   return (
     <li className="flex justify-between gap-x-6 py-5 hover-underline-animation relative">

@@ -1,21 +1,41 @@
+import React, {useState} from "react";
 import BlockDashboard from "@/Components/BlockDashboard.jsx";
-import BlockDashboardLine from "@/Components/BlockDashboardLine.jsx";
 import BlockDashboardGlobal from "@/Components/BlockDashboardGlobal.jsx";
-import BlockDashboardTop from "@/Components/BlockDashboardTop.jsx";
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import frLocale from '@fullcalendar/core/locales/fr';
 import '../../css/FullCalendarStyle.css'
-export default function DashboardLayout() {
+import TaskItem from "@/Pages/Task/TaskItem.jsx";
+export default function DashboardLayout({tasks}) {
+
+  const [dataArr, setDataArr] = useState( tasks );
 
 
+  /*if (!Array.isArray(tasks)) {
+    // Afficher un message ou un contenu alternatif si les tâches ne sont pas un tableau valide
+    return <div>Les tâches ne sont pas disponibles.</div>;
+  }*/
   return (
     <>
       <div className="px-6 pt-6 2xl:container">
 
 
         <div>
-          <BlockDashboardTop/>
+          {dataArr.length === 0 ? (
+              <div className="max-w-7xl mx-auto mt-8 sm:px-6 lg:px-8">
+                Vous n'avez aucune tâche à afficher.
+              </div>
+          ) : (
+
+              <ul role="list" className="divide-y divide-gray-100">
+                {dataArr.map((task) => (
+                    <TaskItem
+                        task={task}
+                        key={task.id}
+                    />
+                ))}
+              </ul>
+          )}
         </div>
 
 

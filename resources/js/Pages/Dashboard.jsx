@@ -1,9 +1,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import DashboardLayout from '@/Layouts/DashboardLayout.jsx'
+import TaskList from "@/Pages/Task/TaskList.jsx";
 
 export default function Dashboard({ auth, tasks }) {
-  console.log(tasks)
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -13,7 +14,7 @@ export default function Dashboard({ auth, tasks }) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                  <DashboardLayout/>
+                  <DashboardLayout tasks={tasks} />
                 </div>
             </div>
         </AuthenticatedLayout>
