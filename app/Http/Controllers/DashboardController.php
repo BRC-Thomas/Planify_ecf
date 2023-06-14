@@ -17,12 +17,14 @@ class DashboardController extends Controller
         $user = auth()->user();
         //$tasks = Task::all(); /*Task::where('user_id', $user->id)->get();*/
         $tasks = Task::latest('created_at')->paginate(3);
+        //dd(env('API_KEY'));
 
         return Inertia::render('Dashboard',[
             'user' => $user,
            // 'tasks' => $tasks,
             'tasks' => $tasks->items(), // Récupérer les éléments de la pagination
-            'links' => $tasks->links(), // Récupérer les liens de pagination
+            //'links' => $tasks->links(), // Récupérer les liens de pagination
+            'apiKey' => env('API_KEY')
         ]);
     }
 }
