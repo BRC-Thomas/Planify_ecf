@@ -3,9 +3,9 @@ export default function BlockDashboardGlobal() {
   return (
 
 
-    <div className="md:col-span-2 lg:col-span-1">
+    <div className="md:col-span-2 lg:col-span-1 ">
       <div
-        className="h-full space-y-6 group p-6 sm:p-8 rounded-3xl bg-white border border-gray-200/50 dark:shadow-none dark:border-gray-700 dark:bg-gray-800 bg-opacity-50 shadow-2xl shadow-gray-600/10">
+        className="h-full space-y-6 group p-6 sm:p-8 rounded-3xl bg-white border border-gray-200/50 dark:shadow-none dark:border-gray-700 dark:bg-gray-800 bg-opacity-50 shadow-2xl shadow-gray-600/10 ">
         <svg
           className="m-auto w-40 opacity-75"
           viewBox="0 0 146 146"
@@ -99,28 +99,37 @@ export default function BlockDashboardGlobal() {
           </defs>
         </svg>
         <div>
-          <h5 className="text-center text-xl text-gray-600 dark:text-gray-300">Global Activities</h5>
+          <h5 className="text-center text-xl text-gray-600 dark:text-gray-300">Nombre de pas</h5>
           <div className="mt-2 flex justify-center gap-4">
-            <h3 className="text-3xl font-bold text-gray-700 dark:text-white">$23,988</h3>
-            <div className="flex items-end gap-1 text-green-500">
+            <h3 className="text-3xl font-bold text-gray-700 dark:text-white">23,988</h3>
+            <div className="flex items-end gap-1 text-green-500 relative">
               <svg
-                className="w-3"
+                className="w-3 "
                 viewBox="0 0 12 15"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path d="M6.00001 0L12 8H-3.05176e-05L6.00001 0Z" fill="currentColor"/>
               </svg>
-              <span>2%</span>
+              <svg
+                className="w-3 absolute bottom-1.5 "
+                viewBox="0 0 12 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M6.00001 0L12 8H-3.05176e-05L6.00001 0Z" fill="currentColor"/>
+              </svg>
+
+              <span>72%</span>
             </div>
           </div>
-          <span className="block text-center text-gray-500 dark:text-gray-400">Compared to last week $13,988</span>
+          <span className="block text-center text-gray-500 dark:text-gray-400">Semaine dernière 13,988</span>
         </div>
         <table className="w-full text-gray-600 dark:text-gray-200">
           <tbody>
           <tr>
-            <td className="py-2">Tailored ui</td>
-            <td className="text-gray-500">896</td>
+            <td className="py-2">Marche</td>
+            <td className="text-gray-500">6 453</td>
             <td>
               <svg
                 className="ml-auto w-16"
@@ -155,8 +164,8 @@ export default function BlockDashboardGlobal() {
             </td>
           </tr>
           <tr>
-            <td className="py-2">Customize</td>
-            <td className="text-gray-500">1200</td>
+            <td className="py-2">Footing</td>
+            <td className="text-gray-500">16 642</td>
             <td>
               <svg
                 className="ml-auto w-16"
@@ -191,8 +200,8 @@ export default function BlockDashboardGlobal() {
             </td>
           </tr>
           <tr>
-            <td className="py-2">Other</td>
-            <td className="text-gray-500">12</td>
+            <td className="py-2">Autre</td>
+            <td className="text-gray-500">893</td>
             <td>
               <svg
                 className="ml-auto w-16"

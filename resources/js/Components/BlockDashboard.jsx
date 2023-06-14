@@ -1,9 +1,9 @@
 export default function BlockDashboard() {
 
   return (
-    <div>
+    <div  className="md:col-span-2 lg:col-span-1">
       <div
-        className="group p-6 sm:p-8 rounded-3xl bg-white border border-gray-200/50 dark:shadow-none dark:border-gray-700 dark:bg-gray-800 bg-opacity-50 shadow-2xl shadow-gray-600/10 lg:h-full">
+        className="h-full space-y-6 group p-6 sm:p-8 rounded-3xl bg-white border border-gray-200/50 dark:shadow-none dark:border-gray-700 dark:bg-gray-800 bg-opacity-50 shadow-2xl shadow-gray-600/10">
         <svg
           className="m-auto w-40"
           viewBox="0 0 56 56"
@@ -50,9 +50,9 @@ export default function BlockDashboard() {
         </svg>
 
         <div className="mt-6">
-          <h5 className="text-center text-xl text-gray-700 dark:text-gray-300">Ask to customize</h5>
+          <h5 className="text-center text-xl text-gray-700 dark:text-gray-300">Objectifs Atteints</h5>
           <div className="mt-2 flex justify-center gap-4">
-            <h3 className="text-3xl font-bold text-gray-700 dark:text-white">28</h3>
+            <h3 className="text-3xl font-bold text-gray-700 dark:text-white">15</h3>
             <div className="flex items-end gap-1 text-green-500">
               <svg
                 className="w-3"
@@ -62,16 +62,16 @@ export default function BlockDashboard() {
               >
                 <path d="M6.00001 0L12 8H-3.05176e-05L6.00001 0Z" fill="currentColor"/>
               </svg>
-              <span>2%</span>
+              <span>16%</span>
             </div>
           </div>
-          <span className="block text-center text-gray-500">Compared to last week 13</span>
+          <span className="block text-center text-gray-500">Semaine dernière 13</span>
         </div>
         <table className="mt-6 -mb-2 w-full text-gray-600 dark:text-gray-300">
           <tbody>
           <tr>
-            <td className="py-2">Tailored ui</td>
-            <td className="text-gray-500">896</td>
+            <td className="py-2">Finance</td>
+            <td className="text-gray-500">6</td>
             <td>
               <svg
                 className="ml-auto w-16"
@@ -106,8 +106,8 @@ export default function BlockDashboard() {
             </td>
           </tr>
           <tr>
-            <td className="py-2">Customize</td>
-            <td className="text-gray-500">1200</td>
+            <td className="py-2">Sport</td>
+            <td className="text-gray-500">8</td>
             <td>
               <svg
                 className="ml-auto w-16"
@@ -142,8 +142,8 @@ export default function BlockDashboard() {
             </td>
           </tr>
           <tr>
-            <td className="py-2">Other</td>
-            <td className="text-gray-500">12</td>
+            <td className="py-2">Autre</td>
+            <td className="text-gray-500">2</td>
             <td>
               <svg
                 className="ml-auto w-16"
