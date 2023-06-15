@@ -52,6 +52,14 @@ export default function DashboardLayout({tasks, apiKey}) {
               plugins={[ dayGridPlugin ]}
               initialView="dayGridMonth"
               locale={'fr'}
+              buttonText={{
+                today: 'aujourd\'hui',
+                month: 'month',
+                week: 'week',
+                day: 'day',
+                list: 'list'
+              }
+              }
               events={dataArr.map((task) => ({ title: task.title, date: task.due_date ? task.due_date.split(" ")[0] : null }))}
 
             />

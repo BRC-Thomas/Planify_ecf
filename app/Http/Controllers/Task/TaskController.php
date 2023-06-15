@@ -111,9 +111,7 @@ class TaskController extends Controller
         $task->description = ($validatedData)['description'];
         $task->category = optional($validatedData)['category'];
 
-        if (isset($validatedData['due_date'])) {
-            $task->due_date = Carbon::createFromTimestamp($validatedData['due_date'] / 1000);
-        } else {
+        if (!(isset($validatedData['due_date']))) {
             $task->due_date = null;
         }
 

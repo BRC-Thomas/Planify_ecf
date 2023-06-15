@@ -16,9 +16,8 @@ class DashboardController extends Controller
          */
         $user = auth()->user();
         //$tasks = Task::all();
-        $tasks = Task::where('user_id', $user->id)->get();
+        $tasks = Task::where('user_id', $user->id)->take(3)->get();
 
-        //$tasks = Task::latest('created_at')->paginate(3);
 
         return Inertia::render('Dashboard',[
             'user' => $user,
