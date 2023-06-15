@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Task;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Task\TaskFormRequest;
 use Carbon\Carbon;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
@@ -18,19 +19,22 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
+        $user = auth()->user();
         $category = $request->input('category');
 
         $tasks = ($category)
-            ? Task::where('category', $category)->get()
-            : Task::all();
-
-        return Inertia::render('Task/Task', [
-            'user' => auth()->user(),
+            ? $user->tasks()->where('category', $category)->get()
+            : $user->tasks;
+            //dd($user);
+            return Inertia::render('Task/Task', [
+            'user' => $user,
             'tasks' => $tasks,
             'flash' => session('success'),
             'selectedCategory' => $category,
         ]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -53,6 +57,7 @@ class TaskController extends Controller
         $task->title = $validatedData['title'];
         $task->description = optional($validatedData)['description'];
         $task->category = $validatedData['category'] ?? 'Sans catégorie';
+        $task->user_id = auth()->id();
 
         if (isset($validatedData['due_date'])) {
             $task->due_date = Carbon::createFromTimestamp($validatedData['due_date'] / 1000);
@@ -66,37 +71,41 @@ class TaskController extends Controller
         return redirect()->route('task.index');
     }
 
-    /**
+   /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
+
+
+     public function show(string $id)
+     {
         //
-    }
+     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $task = Task::findOrFail($id);
+        $user = auth()->user();
+        $task = $user->tasks()->findOrFail($id);
 
-        return Inertia::render('Task/EditTask',[
-            'user' => auth()->user(),
+        return Inertia::render('Task/EditTask', [
+            'user' => $user,
             'task' => $task,
         ]);
     }
 
 
+
     /**
      * Update the specified resource in storage.
      */
-    public function update(TaskFormRequest $request, string $id)
+    public function update(TaskFormRequest $request, string $id, User $user)
     {
         $validatedData = $request->validated();
 
-
-        $task = Task::findOrFail($id);
+        $user = auth()->user();
+        $task = $user->tasks()->findOrFail($id);
 
         $task->title = $validatedData['title'];
         $task->description = ($validatedData)['description'];
@@ -119,11 +128,14 @@ class TaskController extends Controller
      */
     public function updateIsDone(string $id)
     {
-        $task = Task::findOrFail($id);
+
+        $user = auth()->user();
+        $task = $user->tasks()->findOrFail($id);
         $task->isDone = !$task->isDone;
         $task->save();
 
-        return redirect()->route('task.update',$id);
+        return redirect()->route('task.update', ['task' => $task->id]);
+
     }
 
 

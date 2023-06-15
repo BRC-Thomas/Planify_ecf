@@ -29,9 +29,10 @@ export default function TaskList({ tasks, selectedCategory }) {
   const checkElement = async (taskId) => {
     try {
       const updatedTask = await router.put(`/tasks/${taskId}/isDone`);
+
       if (updatedTask) {
         const updatedDataArr = dataArr.map((task) =>
-            task.id === taskId ? updatedTask : task
+          task.id === taskId ? updatedTask : task
         );
         setDataArr(updatedDataArr);
       }
@@ -39,6 +40,7 @@ export default function TaskList({ tasks, selectedCategory }) {
       console.error('Erreur lors de la mise à jour de la tâche', error);
     }
   };
+
 
 
 

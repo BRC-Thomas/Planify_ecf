@@ -22,8 +22,6 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
 });
 
@@ -37,14 +35,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route test
-Route::get('/test', function () {
-    return Inertia::render('Test');
-})->name('test');
+Route::resource('task', TaskController::class)->names('task')
+    ->middleware(['auth', 'verified']);
 
 
-Route::resource('task', TaskController::class)->names('task');
-Route::put('/tasks/{task}/isDone', [TaskController::class, 'updateIsDone'])->name('task.updateIsDone');
+Route::put('/tasks/{task}/isDone', [TaskController::class, 'updateIsDone'])
+    ->middleware(['auth', 'verified'])
+    ->name('task.updateIsDone');
 
 
 
