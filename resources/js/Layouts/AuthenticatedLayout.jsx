@@ -8,7 +8,7 @@ import { Link } from "@inertiajs/react";
 export default function Authenticated({ user, header, children }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false);
-
+  console.log(user)
   return (
     <div className="min-h-screen bg-gray-100">
       <nav className="bg-white border-b border-gray-100">
@@ -31,9 +31,6 @@ export default function Authenticated({ user, header, children }) {
                 >
                   Dashboard
                 </NavLink>
-                <NavLink href="/test" active={route().current("test")}>
-                  Test
-                </NavLink>
                 <NavLink href="/task" active={route().current("task.index")}>
                   Mes tâches
                 </NavLink>
@@ -48,11 +45,12 @@ export default function Authenticated({ user, header, children }) {
                 <Dropdown>
                   <Dropdown.Trigger>
                     <span className="inline-flex rounded-md">
-                      <button
-                        type="button"
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                      >
-                        {user.name}
+                      {user && (
+                        <button
+                          type="button"
+                          className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                        >
+                          {user.name}
 
                         <svg
                           className="ml-2 -mr-0.5 h-4 w-4"
@@ -66,7 +64,7 @@ export default function Authenticated({ user, header, children }) {
                             clipRule="evenodd"
                           />
                         </svg>
-                      </button>
+                      </button>)}
                     </span>
                   </Dropdown.Trigger>
 
@@ -182,8 +180,10 @@ export default function Authenticated({ user, header, children }) {
       <main>{children}</main>
 
       <button
-          className="bg-indigo-200 hover:bg-indigo-300 text-gray-800 px-2 text-3xl rounded-full inline-flex items-center fixed bottom-4 right-2 ">
-        <a href='/task/create'>+</a>
+          className="bg-indigo-200 hover:bg-indigo-300 px-2 rounded-full inline-flex items-center fixed bottom-4 right-2 ">
+        <NavLink href="/task/create">
+          <span className={'text-3xl text-gray-800'}>+</span>
+        </NavLink>
       </button>
     </div>
   );

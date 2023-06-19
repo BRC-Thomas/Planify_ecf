@@ -1,5 +1,5 @@
 import './TaskItem.css';
-import {Link, usePage} from "@inertiajs/react";
+import {Link, router, usePage} from "@inertiajs/react";
 import {useState} from "react";
 
 
@@ -24,13 +24,22 @@ export default function TaskItem({task, delFunc, checkFunc,  }) {
     delFunc(task.id);
   };
 
-  const handleCheck = e => {
+/*  const handleCheck = e => {
     e.preventDefault();
     setIsDone(!task.isDone);
     checkFunc(task.id);
-  }
+  }*/
+  const handleCheck = async (e) => {
+    e.preventDefault();
+    setIsDone(!task.isDone);
 
-  //console.log(task)
+    try {
+      await router.put(`/tasks/${task.id}/isDone`);
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour de la tâche', error);
+    }
+  };
+
 
   return (
     <li className="flex justify-between gap-x-6 py-5 hover-underline-animation relative">

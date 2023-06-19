@@ -19,7 +19,7 @@ export default function Task({ user, tasks, selectedCategory  }) {
 
   return (
     <AuthenticatedLayout
-      user={user.name}
+      user={user}
       header={
         <h2 className="font-semibold text-xl text-gray-800 leading-tight">
           Mes tâches
